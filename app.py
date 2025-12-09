@@ -1,8 +1,18 @@
-# --- 這裡是新的字體設定 ---
+import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import random
+import time
+from datetime import datetime, timedelta
+import matplotlib as mpl
+import os
+
+# --- 設定字體 (使用 packages.txt 安裝的思源黑體) ---
 plt.rcParams['font.family'] = ['sans-serif']
-plt.rcParams['font.sans-serif'] = ['Noto Sans CJK TC', 'Microsoft JhengHei', 'sans-serif']
+plt.rcParams['font.sans-serif'] = ['Noto Sans CJK TC', 'sans-serif']
 plt.rcParams['axes.unicode_minus'] = False 
-# -----------------------
+# ------------------------------------------------
 
 # 自定義CSS樣式
 st.markdown("""
@@ -3101,6 +3111,7 @@ with tab1:
     st.markdown("---")
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
             
+
 
 
 
