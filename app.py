@@ -11,7 +11,8 @@ import shutil
 # 🚀 修復版：自動清除壞檔並重新下載官方字體
 # ---------------------------------------------------------
 def download_and_set_font():
-    font_name = "NotoSansTC-Regular.ttf"
+    # 這裡我們改用 .otf 格式，這是 Google Noto 的原始格式，連結較穩定
+    font_name = "NotoSansCJKtc-Regular.otf"
     
     # 1. 強制檢查：如果檔案太小（小於 1MB），代表是壞檔，直接刪除！
     if os.path.exists(font_name):
@@ -22,11 +23,11 @@ def download_and_set_font():
     
     # 2. 如果檔案不存在（或剛被刪除），開始下載
     if not os.path.exists(font_name):
-        with st.spinner(f"正在修復並下載中文字體 (約 6MB)..."):
-            # 改用 Google Fonts 的穩定 CDN 連結
-            url = "https://github.com/google/fonts/raw/main/ofl/notosanstc/NotoSansTC-Regular.ttf"
+        with st.spinner(f"正在修復並下載中文字體 (約 16MB)..."):
+            # 改用 Google Fonts 的穩定 Raw 連結 (OTF 版本)
+            url = "https://raw.githubusercontent.com/googlefonts/noto-cjk/main/Sans/OTF/TraditionalChinese/NotoSansCJKtc-Regular.otf"
             try:
-                response = requests.get(url, timeout=10)
+                response = requests.get(url, timeout=30)
                 response.raise_for_status() # 檢查連線是否成功
                 with open(font_name, "wb") as f:
                     f.write(response.content)
@@ -3146,6 +3147,7 @@ with tab1:
     st.markdown("---")
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
             
+
 
 
 
