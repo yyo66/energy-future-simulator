@@ -1,25 +1,44 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt  # 這一行一定要有，而且要在 plt.rcParams 之前！
-import random
-import time
-from datetime import datetime, timedelta
-import matplotlib as mpl
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 import os
+import requests
 
-# --- 設定中文字體 (使用 fonts-wqy-zenhei) ---
-plt.rcParams['font.family'] = ['sans-serif']
-plt.rcParams['font.sans-serif'] = ['WenQuanYi Zen Hei', 'WenQuanYi Micro Hei', 'sans-serif']
-plt.rcParams['axes.unicode_minus'] = False 
-# ----------------------------------------
-# --- 暫時加入這段來清除快取 ---
-cache_dir = matplotlib.get_cachedir()
-if os.path.exists(cache_dir):
-    shutil.rmtree(cache_dir)
-    st.toast(f"🧹 已清除字體快取：{cache_dir}，正在重新載入...", icon="🎉")
-# ---------------------------
+# ---------------------------------------------------------
+# 🚀 大絕招：如果找不到字體，直接從網路下載 (避開所有安裝問題)
+# ---------------------------------------------------------
+def download_and_set_font():
+    # 指定字體檔名 (思源黑體)
+    font_name = "NotoSansTC-Regular.ttf"
+    
+    # 如果檔案不存在，就從 Google 下載
+    if not os.path.exists(font_name):
+        # 顯示下載進度條，避免使用者以為當機
+        with st.spinner(f"正在下載中文字體，請稍候..."):
+            url = "https://github.com/google/fonts/raw/main/ofl/notosanstc/NotoSansTC-Regular.ttf"
+            response = requests.get(url)
+            with open(font_name, "wb") as f:
+                f.write(response.content)
+            st.success("✅ 字體下載完成！")
 
+    # 加入字體到 Matplotlib
+    fm.fontManager.addfont(font_name)
+    
+    # 設定全域字體
+    font_prop = fm.FontProperties(fname=font_name)
+    plt.rcParams['font.family'] = font_prop.get_name()
+    plt.rcParams['axes.unicode_minus'] = False 
+    
+    # (選用) 測試一下有沒有抓到
+    # st.write(f"目前使用的字體: {plt.rcParams['font.family']}")
+
+# 執行字體設定
+download_and_set_font()
+# ---------------------------------------------------------
+
+# ... 下面接著寫您的 st.title 或其他程式碼 ...
 # 自定義CSS樣式
 st.markdown("""
 <style>
@@ -3117,6 +3136,7 @@ with tab1:
     st.markdown("---")
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
             
+
 
 
 
