@@ -1,22 +1,18 @@
-import matplotlib.font_manager as fm
-import os
+import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import random
+import time
+from datetime import datetime, timedelta
+import matplotlib as mpl
 
-# 取得字體檔案的絕對路徑 (確保您的 .ttf 檔名正確且已上傳)
-# 假設字體檔名為 'TaipeiSansTCBeta-Regular.ttf'
-font_path = 'TaipeiSansTCBeta-Regular.ttf' 
+# --- 這裡是新的字體設定 ---
+plt.rcParams['font.family'] = ['sans-serif']
+plt.rcParams['font.sans-serif'] = ['Noto Sans CJK TC', 'Microsoft JhengHei', 'sans-serif']
+plt.rcParams['axes.unicode_minus'] = False 
+# -----------------------
 
-# 檢查檔案是否存在 (除錯用)
-if os.path.exists(font_path):
-    # 將字體加入 Matplotlib 的字體管理員
-    fm.fontManager.addfont(font_path)
-    
-    # 設定 Matplotlib 使用這個新加入的字體名稱
-    font_prop = fm.FontProperties(fname=font_path)
-    plt.rcParams['font.family'] = font_prop.get_name()
-else:
-    st.error(f"找不到字體檔案：{font_path}，請確認檔案已上傳至專案目錄。")
-
-plt.rcParams['axes.unicode_minus'] = False  # 解決負號顯示問題
 # 自定義CSS樣式
 st.markdown("""
 <style>
@@ -3114,6 +3110,7 @@ with tab1:
     st.markdown("---")
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
             
+
 
 
 
