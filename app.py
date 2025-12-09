@@ -1,24 +1,20 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
-import random
-import time
-from datetime import datetime, timedelta
-import matplotlib as mpl
-import os
+import matplotlib
 
-# --- 這裡開始是字體設定 ---
-# 1. 先確認 packages.txt 有沒有生效，如果沒生效就回退到預設字體，避免報錯
-try:
-    plt.rcParams['font.family'] = ['sans-serif']
-    # 'Noto Sans CJK TC' 是 packages.txt 安裝的字體
-    # 'Microsoft JhengHei' 是給您在自己電腦上跑的時候用的
-    plt.rcParams['font.sans-serif'] = ['Noto Sans CJK TC', 'Microsoft JhengHei', 'sans-serif']
-    plt.rcParams['axes.unicode_minus'] = False 
-except Exception as e:
-    st.warning(f"字體設定有小問題，但程式繼續執行: {e}")
-# --- 字體設定結束 ---
+# --- 更新後的強力字體設定 ---
+plt.rcParams['font.family'] = ['sans-serif']
+# 加入更多可能的字體名稱，包含 JP (通常也支援繁體) 和 Android 預設字體
+plt.rcParams['font.sans-serif'] = [
+    'Noto Sans CJK TC', 
+    'Noto Sans CJK JP', 
+    'Noto Sans CJK SC', 
+    'WenQuanYi Zen Hei', 
+    'Microsoft JhengHei', 
+    'sans-serif'
+]
+plt.rcParams['axes.unicode_minus'] = False 
+# -------------------------
 
 # 自定義CSS樣式
 st.markdown("""
@@ -3117,6 +3113,7 @@ with tab1:
     st.markdown("---")
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
             
+
 
 
 
