@@ -2,18 +2,19 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import random
-import time
-from datetime import datetime, timedelta
-import matplotlib as mpl
 import matplotlib.font_manager as fm
 import os
 
-# 取得字體檔案的絕對路徑 (確保您的 .ttf 檔名正確且已上傳)
-# 假設字體檔名為 'TaipeiSansTCBeta-Regular.ttf'
-font_path = 'TaipeiSansTCBeta-Regular.ttf' 
+# --- 關鍵修改開始 ---
+# 1. 抓取目前這個 python 檔案所在的「絕對路徑」資料夾
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# 檢查檔案是否存在 (除錯用)
+# 2. 組合路徑：告訴程式字體檔就在這個資料夾裡面
+# 請確保 GitHub 上的檔名跟這裡 'TaipeiSansTCBeta-Regular.ttf' 完全一樣
+font_path = os.path.join(current_dir, 'TaipeiSansTCBeta-Regular.ttf')
+# --- 關鍵修改結束 ---
+
+# 檢查檔案是否存在
 if os.path.exists(font_path):
     # 將字體加入 Matplotlib 的字體管理員
     fm.fontManager.addfont(font_path)
@@ -22,7 +23,8 @@ if os.path.exists(font_path):
     font_prop = fm.FontProperties(fname=font_path)
     plt.rcParams['font.family'] = font_prop.get_name()
 else:
-    st.error(f"找不到字體檔案：{font_path}，請確認檔案已上傳至專案目錄。")
+    # 如果還是找不到，印出目前程式看到的路径，方便除錯
+    st.error(f"❌ 找不到字體檔案！\n程式試圖尋找的路徑是：{font_path}")
 
 plt.rcParams['axes.unicode_minus'] = False  # 解決負號顯示問題
 # 自定義CSS樣式
@@ -3122,4 +3124,5 @@ with tab1:
     st.markdown("---")
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
             
+
 
