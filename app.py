@@ -8,13 +8,11 @@ from datetime import datetime, timedelta
 import matplotlib as mpl
 import os
 
-# -------------------------------------------------------
-# 設定中文字體 (必須放在 import 之後)
-# -------------------------------------------------------
+# --- 設定中文字體 (使用 fonts-wqy-zenhei) ---
 plt.rcParams['font.family'] = ['sans-serif']
-plt.rcParams['font.sans-serif'] = ['Noto Sans CJK TC', 'Microsoft JhengHei', 'sans-serif']
+plt.rcParams['font.sans-serif'] = ['WenQuanYi Zen Hei', 'WenQuanYi Micro Hei', 'sans-serif']
 plt.rcParams['axes.unicode_minus'] = False 
-# -------------------------------------------------------
+# ----------------------------------------
 # --- 暫時加入這段來清除快取 ---
 cache_dir = matplotlib.get_cachedir()
 if os.path.exists(cache_dir):
@@ -3119,6 +3117,7 @@ with tab1:
     st.markdown("---")
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
             
+
 
 
 
