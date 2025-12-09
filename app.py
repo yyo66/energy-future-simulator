@@ -15,8 +15,12 @@ plt.rcParams['font.family'] = ['sans-serif']
 plt.rcParams['font.sans-serif'] = ['Noto Sans CJK TC', 'Microsoft JhengHei', 'sans-serif']
 plt.rcParams['axes.unicode_minus'] = False 
 # -------------------------------------------------------
-
-# ... (下面接著寫您的其他程式碼) ...
+# --- 暫時加入這段來清除快取 ---
+cache_dir = matplotlib.get_cachedir()
+if os.path.exists(cache_dir):
+    shutil.rmtree(cache_dir)
+    st.toast(f"🧹 已清除字體快取：{cache_dir}，正在重新載入...", icon="🎉")
+# ---------------------------
 
 # 自定義CSS樣式
 st.markdown("""
@@ -3115,6 +3119,7 @@ with tab1:
     st.markdown("---")
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
             
+
 
 
 
