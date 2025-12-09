@@ -7,42 +7,6 @@ import os
 import requests
 
 # ---------------------------------------------------------
-# 🚀 最終修復版：更換為穩定的 .otf 下載點
-# ---------------------------------------------------------
-def download_and_set_font():
-    # 改用 .otf 檔名，避免跟之前的壞檔搞混
-    font_name = "NotoSansCJKtc-Regular.otf"
-    
-    # 1. 檢查並刪除壞掉的檔案 (如果檔案太小，代表下載失敗過)
-    if os.path.exists(font_name) and os.path.getsize(font_name) < 1000000:
-        os.remove(font_name)
-    
-    # 2. 如果檔案不存在，才下載
-    if not os.path.exists(font_name):
-        with st.spinner("正在下載中文字體 (約 16MB)，請耐心等候..."):
-            # Google Fonts Noto CJK 的官方穩定 Raw 連結
-            url = "https://raw.githubusercontent.com/googlefonts/noto-cjk/main/Sans/OTF/TraditionalChinese/NotoSansCJKtc-Regular.otf"
-            try:
-                response = requests.get(url, timeout=30)
-                response.raise_for_status()  # 確保連結有效 (不會 404)
-                with open(font_name, "wb") as f:
-                    f.write(response.content)
-                st.success("✅ 字體下載成功！已套用思源黑體。")
-            except Exception as e:
-                st.error(f"❌ 下載失敗，請檢查網路: {e}")
-                return
-
-    # 3. 加入字體
-    try:
-        fm.fontManager.addfont(font_name)import streamlit as st
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.font_manager as fm
-import os
-import requests
-
-# ---------------------------------------------------------
 # 🚀 終極修復版：使用 CDN 連結下載，保證穩定不 404
 # ---------------------------------------------------------
 def download_and_set_font():
@@ -3181,6 +3145,7 @@ with tab1:
     st.markdown("---")
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
             
+
 
 
 
