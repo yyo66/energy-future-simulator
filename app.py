@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 import matplotlib as mpl
 
 # 設定中文字型 - 解決亂碼問題
-plt.rcParams['font.sans-serif'] = ['Noto Sans CJK TC']  # 繁體中文
+plt.rcParams['font.sans-serif'] = ['SimHei', 'Noto Sans CJK TC', 'sans-serif']
 plt.rcParams['axes.unicode_minus'] = False  # 解決負號顯示問題
 
 # 自定義CSS樣式
@@ -3109,3 +3109,4 @@ with tab1:
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
 
             
+
