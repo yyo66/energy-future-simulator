@@ -5,51 +5,43 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import os
 import requests
-import shutil
 
 # ---------------------------------------------------------
-# 🚀 修復版：自動清除壞檔並重新下載官方字體
+# 🚀 最終修復版：更換為穩定的 .otf 下載點
 # ---------------------------------------------------------
 def download_and_set_font():
-    # 這裡我們改用 .otf 格式，這是 Google Noto 的原始格式，連結較穩定
+    # 改用 .otf 檔名，避免跟之前的壞檔搞混
     font_name = "NotoSansCJKtc-Regular.otf"
     
-    # 1. 強制檢查：如果檔案太小（小於 1MB），代表是壞檔，直接刪除！
-    if os.path.exists(font_name):
-        file_size = os.path.getsize(font_name)
-        if file_size < 1000000: # 小於 1MB
-            print("發現損毀的字體檔，正在刪除...")
-            os.remove(font_name)
-    
-    # 2. 如果檔案不存在（或剛被刪除），開始下載
+    # 如果檔案不存在，才下載
     if not os.path.exists(font_name):
-        with st.spinner(f"正在修復並下載中文字體 (約 16MB)..."):
-            # 改用 Google Fonts 的穩定 Raw 連結 (OTF 版本)
+        with st.spinner("正在下載中文字體 (約 16MB)，請耐心等候..."):
+            # Google Fonts Noto CJK 的官方穩定 Raw 連結
             url = "https://raw.githubusercontent.com/googlefonts/noto-cjk/main/Sans/OTF/TraditionalChinese/NotoSansCJKtc-Regular.otf"
             try:
                 response = requests.get(url, timeout=30)
-                response.raise_for_status() # 檢查連線是否成功
+                response.raise_for_status()  # 確保連結有效 (不會 404)
                 with open(font_name, "wb") as f:
                     f.write(response.content)
-                st.success("✅ 字體下載成功！")
+                st.success("✅ 字體下載成功！已套用思源黑體。")
             except Exception as e:
-                st.error(f"下載失敗，請檢查網路連結: {e}")
-                return # 下載失敗就停止，避免當機
+                st.error(f"❌ 下載失敗，請檢查網路: {e}")
+                return
 
-    # 3. 加入字體 (加強防呆)
+    # 加入字體
     try:
         fm.fontManager.addfont(font_name)
         font_prop = fm.FontProperties(fname=font_name)
         plt.rcParams['font.family'] = font_prop.get_name()
         plt.rcParams['axes.unicode_minus'] = False 
     except Exception as e:
-        st.warning(f"字體載入發生問題，改用預設字體: {e}")
+        st.warning(f"字體載入有點問題，改用系統預設: {e}")
 
 # 執行設定
 download_and_set_font()
 # ---------------------------------------------------------
 
-# ... (下方接著寫您的主程式 st.title 等等) ...
+# ... (下面接著寫您的 st.title 等主程式) ...
 # 自定義CSS樣式
 st.markdown("""
 <style>
@@ -3147,6 +3139,7 @@ with tab1:
     st.markdown("---")
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
             
+
 
 
 
