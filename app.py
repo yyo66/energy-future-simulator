@@ -1,13 +1,22 @@
-import matplotlib.font_manager as fm
 import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt  # 這一行一定要有，而且要在 plt.rcParams 之前！
+import random
+import time
+from datetime import datetime, timedelta
+import matplotlib as mpl
+import os
 
-# --- 字體偵探：列出系統支援的字體 ---
-st.write("🔍 正在偵測系統字體...")
-fonts = [f.name for f in fm.fontManager.ttflist]
-# 篩選出可能的中文或通用字體
-chinese_fonts = [f for f in fonts if 'Noto' in f or 'Hei' in f or 'Kai' in f or 'Sans' in f]
-st.write("系統找到的相關字體名稱：", list(set(chinese_fonts)))
-# --------------------------------
+# -------------------------------------------------------
+# 設定中文字體 (必須放在 import 之後)
+# -------------------------------------------------------
+plt.rcParams['font.family'] = ['sans-serif']
+plt.rcParams['font.sans-serif'] = ['Noto Sans CJK TC', 'Microsoft JhengHei', 'sans-serif']
+plt.rcParams['axes.unicode_minus'] = False 
+# -------------------------------------------------------
+
+# ... (下面接著寫您的其他程式碼) ...
 
 # 自定義CSS樣式
 st.markdown("""
@@ -3106,6 +3115,7 @@ with tab1:
     st.markdown("---")
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
             
+
 
 
 
