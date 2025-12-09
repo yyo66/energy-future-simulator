@@ -2,17 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-# 設定中文字型 - 解決亂碼問題
-import matplotlib.font_manager as fm
-
-# 下載並安裝 Noto Sans CJK 字型（支援繁體中文）
-try:
-    # 嘗試使用 Noto Sans CJK（Google 提供，跨平台支援好）
-    plt.rcParams['font.sans-serif'] = ['Noto Sans CJK TC']  # 繁體中文
-except:
-    # 如果不行，改用 SimHei
-    plt.rcParams['font.sans-serif'] = ['SimHei']
-plt.rcParams['axes.unicode_minus'] = False  # 解決負號顯示問題
 import random
 import time
 from datetime import datetime, timedelta
@@ -715,9 +704,14 @@ with tab1:
                 contributions = [76, 16, 6, 2]
                 colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4']
                 ax.pie(contributions, labels=gases, colors=colors, autopct='%1.1f%%', startangle=90)
-                ax.set_title('溫室氣體排放貢獻比例')
+                ax.set_title('Greenhouse Gas Emission')
                 st.pyplot(fig)
                 plt.close(fig)
+
+                # 👇 用 st.markdown 補中文
+                st.markdown("### 溫室氣體排放貢獻比例")
+                st.markdown("- 二氧化碳：76%")
+                st.markdown("- 甲烷：16%")
         
         # 海平面上升
         with st.expander("🌊 海平面上升", expanded=False):
@@ -746,8 +740,8 @@ with tab1:
                 fig, ax = plt.subplots(figsize=(8, 5))
                 ax.plot(years, low_scenario, marker='o', label='樂觀情景', linewidth=2)
                 ax.plot(years, high_scenario, marker='s', label='悲觀情景', linewidth=2)
-                ax.set_xlabel('年份')
-                ax.set_ylabel('海平面上升 (厘米)')
+                ax.set_xlabel('Year')
+                ax.set_ylabel('Sea Level Rise (cm)')
                 ax.set_title('海平面上升預測 (相比2000年)')
                 ax.legend()
                 ax.grid(True, alpha=0.3)
@@ -814,7 +808,7 @@ with tab1:
                 
                 fig, ax = plt.subplots(figsize=(8, 5))
                 ax.bar(years, ice_extent, color='#87CEEB', alpha=0.7)
-                ax.set_xlabel('年份')
+                ax.set_xlabel('Year')
                 ax.set_ylabel('海冰面積 (百萬平方公里)')
                 ax.set_title('北極9月最小海冰面積變化')
                 st.pyplot(fig)
@@ -2593,7 +2587,7 @@ with tab1:
             
             fig, ax = plt.subplots(figsize=(10, 4))
             ax.plot(investment_years, roi_trend, marker='o', linewidth=2, color='#00e676')
-            ax.set_xlabel('年份')
+            ax.set_xlabel('Year')
             ax.set_ylabel('投資回報率 (%)')
             ax.set_title('投資回報率趨勢預測')
             ax.grid(True, alpha=0.3)
@@ -3117,5 +3111,6 @@ with tab1:
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
 
             
+
 
 
