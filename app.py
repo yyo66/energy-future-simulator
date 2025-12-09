@@ -13,7 +13,11 @@ def download_and_set_font():
     # 改用 .otf 檔名，避免跟之前的壞檔搞混
     font_name = "NotoSansCJKtc-Regular.otf"
     
-    # 如果檔案不存在，才下載
+    # 1. 檢查並刪除壞掉的檔案 (如果檔案太小，代表下載失敗過)
+    if os.path.exists(font_name) and os.path.getsize(font_name) < 1000000:
+        os.remove(font_name)
+    
+    # 2. 如果檔案不存在，才下載
     if not os.path.exists(font_name):
         with st.spinner("正在下載中文字體 (約 16MB)，請耐心等候..."):
             # Google Fonts Noto CJK 的官方穩定 Raw 連結
@@ -28,7 +32,7 @@ def download_and_set_font():
                 st.error(f"❌ 下載失敗，請檢查網路: {e}")
                 return
 
-    # 加入字體
+    # 3. 加入字體
     try:
         fm.fontManager.addfont(font_name)
         font_prop = fm.FontProperties(fname=font_name)
@@ -3139,6 +3143,7 @@ with tab1:
     st.markdown("---")
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
             
+
 
 
 
