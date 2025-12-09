@@ -2,14 +2,22 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+# 設定中文字型 - 解決亂碼問題
+import matplotlib.font_manager as fm
+
+# 下載並安裝 Noto Sans CJK 字型（支援繁體中文）
+try:
+    # 嘗試使用 Noto Sans CJK（Google 提供，跨平台支援好）
+    plt.rcParams['font.sans-serif'] = ['Noto Sans CJK TC']  # 繁體中文
+except:
+    # 如果不行，改用 SimHei
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False  # 解決負號顯示問題
 import random
 import time
 from datetime import datetime, timedelta
 import matplotlib as mpl
 
-# 設定中文字型 - 解決亂碼問題
-plt.rcParams['font.sans-serif'] = ['SimHei', 'Noto Sans CJK TC', 'sans-serif']
-plt.rcParams['axes.unicode_minus'] = False  # 解決負號顯示問題
 
 # 自定義CSS樣式
 st.markdown("""
@@ -3109,4 +3117,5 @@ with tab1:
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
 
             
+
 
