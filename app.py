@@ -714,6 +714,16 @@ with tab1:
                 <p>物種面臨威脅</p>
             </div>
             """, unsafe_allow_html=True)
+
+        st.markdown("### 🌡️ 溫室效應機制圖解")
+        # 圖片來源：NASA/Wikimedia Commons (Public Domain)
+        greenhouse_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/The_greenhouse_effect.svg/1200px-The_greenhouse_effect.svg.png"
+        st.image(
+            greenhouse_url,
+            caption="圖解：太陽輻射穿過大氣層，地表反射的熱量被溫室氣體吸收，導致溫度上升。(來源: NASA/Wikimedia)",
+            use_container_width=True # 讓圖片自適應寬度
+        )
+        st.markdown("---")
         
         # 氣候變遷的各個維度
         st.markdown("---")
@@ -3148,6 +3158,7 @@ with tab1:
     st.markdown("---")
     st.caption("🌱 本模擬器僅用於教育目的，數據為簡化估算 | 打造永續未來需要每個人的參與")        
             
+
 
 
 
